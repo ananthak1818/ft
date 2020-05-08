@@ -1,4 +1,6 @@
 class Stock < ApplicationRecord
+    has_many :user_stocks
+    has_many :users, through: :user_stocks
     def self.new_lookup(ticker_symbol)
         client = IEX::Api::Client.new(publishable_token: 'Tpk_a2a4b0a6c139456491af81957a10e6a7',
                                     endpoint: 'https://sandbox.iexapis.com/v1')
@@ -7,5 +9,9 @@ class Stock < ApplicationRecord
         rescue => exception
             return nil
         end                                    
+    end
+
+    def self.check_db(ticker_symbol)
+        where(ticker: ticker_symbol).first
     end
 end

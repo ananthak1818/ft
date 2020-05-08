@@ -1,0 +1,26 @@
+<div class="row">
+        <div class="col-9">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% @friends.each do |frnd| %>
+                    <tr>
+                        <td><%= frnd.email%></td>
+                        <td><%= frnd.first_name%></td>
+                        <td><%= frnd.last_name%></td>
+                        <td>
+                        <%= link_to 'View Profile', user_path(frnd) ,class: "btn btn-sm btn-success" %>
+                        <%= link_to 'Stop following', friendship_path(frnd), method: :delete, data:{confirm: 'Are you sure ? '} , class:'btn btn-warning'%></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
